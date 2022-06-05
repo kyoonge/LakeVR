@@ -1,34 +1,79 @@
 using System.Collections;
+
 using System.Collections.Generic;
+
 using UnityEngine;
 
+
+
 public class PlayMusic : MonoBehaviour
+
 {
-    private AudioSource audio;
-    public AudioClip music;
-   
 
-    // Start is called before the first frame update
-    void Start()
+    public AudioSource sound;
+
+    public AudioClip music, check;
+
+
+
+    private void Start()
+
     {
-        
+
+        sound = this.GetComponent<AudioSource>();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        this.audio = this.gameObject.AddComponent<AudioSource>();
-        this.audio.clip = this.music;
 
-        if(collision.collider.gameObject.CompareTag("Player"))
+    private void OnTriggerEnter(Collider collision)
+
+    {
+
+        if (collision.gameObject.CompareTag("Player"))
+
         {
-            Debug.Log("music");
-            //this.audio.Play();
+
+
+
+
+
+            if (sound.isPlaying)
+
+            {
+
+                sound.Stop();
+
+                Debug.Log("stop");
+
+                sound.clip = check;
+
+                sound.Play();
+
+            }
+
+            else
+
+            {
+
+                sound.clip = music;
+
+                sound.Play();
+
+                Debug.Log("music");
+
+
+
+            }
+
+
+
         }
+
     }
+
+
+
+
+
 }

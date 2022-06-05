@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SimpleCapsuleWithStickMovement : MonoBehaviour
 {
@@ -19,6 +20,12 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 	public event Action CameraUpdated;
 	public event Action PreCharacterMove;
 
+	public AudioSource footSound;
+
+	int num;
+	public Text TextNum;
+
+
 	private void Awake()
 	{
 		_rigidbody = GetComponent<Rigidbody>();
@@ -27,7 +34,8 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 
 	void Start ()
 	{
-		
+		footSound = this.GetComponent<AudioSource>();
+		TextNum = GameObject.Find("Text").GetComponent<Text>();
 	}
 	
 	private void FixedUpdate()
@@ -36,7 +44,13 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
         if (PreCharacterMove != null) PreCharacterMove();
 
         if (HMDRotatesPlayer) RotatePlayerToHMD();
-		if (EnableLinearMovement) StickMovement();
+
+		if (EnableLinearMovement)
+		{
+			StickMovement();
+
+		}
+
 		if (EnableRotation) SnapTurn();
 	}
 
@@ -65,8 +79,22 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		Vector2 primaryAxis = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 		moveDir += ort * (primaryAxis.x * Vector3.right);
 		moveDir += ort * (primaryAxis.y * Vector3.forward);
+		
 		//_rigidbody.MovePosition(_rigidbody.transform.position + moveDir * Speed * Time.fixedDeltaTime);
 		_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
+
+		//UI
+		TextNum.text = "v: " + _rigidbody.velocity;
+		Debug.Log(primaryAxis);
+
+		if (primaryAxis.magnitude > 0)
+		{
+			if (!footSound.isPlaying)
+			{
+				footSound.Play();
+			}
+		}
+
 	}
 
 	void SnapTurn()

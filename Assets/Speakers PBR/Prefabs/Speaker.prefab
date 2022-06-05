@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33396749231641868}
   - component: {fileID: 23452427068751864}
   - component: {fileID: 7554734864528344316}
+  - component: {fileID: 9128357130655047266}
   m_Layer: 0
   m_Name: Speaker
   m_TagString: Untagged
@@ -98,3 +99,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9128357130655047266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1551617764114010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a4a8878fbd3b4c4d96c42c17b2c4e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 0}
