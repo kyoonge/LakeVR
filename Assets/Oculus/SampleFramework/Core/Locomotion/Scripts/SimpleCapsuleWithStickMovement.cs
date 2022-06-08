@@ -84,8 +84,8 @@ public class SimpleCapsuleWithStickMovement : MonoBehaviour
 		_rigidbody.MovePosition(_rigidbody.position + moveDir * Speed * Time.fixedDeltaTime);
 
 		//UI
-		TextNum.text = "v: " + _rigidbody.velocity;
-		Debug.Log(primaryAxis);
+		//TextNum.text = "v: " + _rigidbody.velocity;
+		//Debug.Log(primaryAxis);
 
 		if (primaryAxis.magnitude > 0)
 		{
